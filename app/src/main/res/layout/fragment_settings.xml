@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F9FA"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Settings"
+            android:textColor="#2E7D32"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Customize your experience"
+            android:textColor="#888888"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Section 1: Account Settings (Fixed Rows) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_card"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView android:text="Account Settings" android:textStyle="bold" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="16dp"/>
+
+            <include layout="@layout/item_setting_toggle" />
+            <include layout="@layout/item_setting_toggle" />
+            <include layout="@layout/item_setting_toggle" />
+        </LinearLayout>
+
+        <!-- Section 2: Meal Plan Preferences -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_card"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView android:text="Meal Plan Preferences" android:textStyle="bold" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+            <TextView android:text="Daily Calorie Target" android:layout_marginTop="16dp" android:textSize="12sp" android:textColor="#888888" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal" android:layout_marginTop="8dp">
+                <SeekBar android:id="@+id/sbCalories" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:max="4000" android:progress="2000" android:progressTint="#2E7D32" android:thumbTint="#2E7D32"/>
+                <EditText android:layout_width="60dp" android:layout_height="40dp" android:text="2000" android:gravity="center" android:background="@drawable/bg_input_field" android:layout_marginStart="8dp"/>
+                <TextView android:text="cal" android:layout_marginStart="4dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <!-- Cuisine Chips -->
+            <TextView android:text="Cuisine Preferences" android:layout_marginTop="16dp" android:textSize="12sp" android:textColor="#888888" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <com.google.android.material.chip.ChipGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:chipSpacing="8dp">
+                <com.google.android.material.chip.Chip style="@style/Widget.MaterialComponents.Chip.Filter" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Mediterranean" android:checked="true" app:chipBackgroundColor="#2E7D32" android:textColor="@color/white"/>
+                <com.google.android.material.chip.Chip style="@style/Widget.MaterialComponents.Chip.Filter" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Asian" />
+                <com.google.android.material.chip.Chip style="@style/Widget.MaterialComponents.Chip.Filter" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Italian" android:checked="true" app:chipBackgroundColor="#2E7D32" android:textColor="@color/white"/>
+            </com.google.android.material.chip.ChipGroup>
+        </LinearLayout>
+
+        <!-- Section 3: Notifications (THIS IS THE LISTVIEW) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_card"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView android:text="Notifications" android:textStyle="bold" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+            <ListView
+                android:id="@+id/lvNotifications"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_marginTop="12dp"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="8dp" />
+        </LinearLayout>
+
+        <!-- Section 4: Data & Privacy -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_card"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView android:text="Data &amp; Privacy" android:textStyle="bold" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/btnExport"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="#F5F5F5"
+                android:text="Export My Data"
+                android:textColor="#333333"
+                android:textAllCaps="false"
+                app:icon="@drawable/ic_download"
+                app:iconTint="#2E7D32" />
+
+            <Button
+                android:id="@+id/btnDelete"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="#FFF0F0"
+                android:text="Delete My Account"
+                android:textColor="#D32F2F"
+                android:textAllCaps="false"
+                app:icon="@drawable/ic_delete"
+                app:iconTint="#D32F2F" />
+        </LinearLayout>
+
+        <!-- Footer -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
+            android:text="NutriNest v1.2.0\n© 2026 NutriNest. All rights reserved."
+            android:textColor="#BBBBBB"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+</ScrollView>
