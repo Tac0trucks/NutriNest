@@ -15,5 +15,6 @@ interface ProfileContract {
         fun addNewRestriction(name: String) // CONCEPT: Add Item
         fun deleteRestriction(position: Int) // CONCEPT: Remove Item
         fun toggleRestriction(position: Int) // CONCEPT: Click Listener logic
+        fun saveUserData(fullName: String, email: String, restrictions: List<Restriction>)
     }
 }

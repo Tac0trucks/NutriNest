@@ -9,8 +9,9 @@ class UserRepository {
     }
 
     fun login(email: String, pass: String, callback: (Result<User>) -> Unit) {
-        // Mock login
-        val mockUser = User("1", email, "Sarah", "token")
+        // Mock login: try to extract a name from email or use existing
+        val name = currentUser?.fullName ?: email.substringBefore("@").replaceFirstChar { it.uppercase() }
+        val mockUser = User("1", email, name, "token")
 
         // Explicitly refer to the companion object variable
         UserRepository.currentUser = mockUser

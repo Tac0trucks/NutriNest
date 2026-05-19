@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F8F9FA"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:clipToPadding="false"
+    android:paddingBottom="80dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -37,42 +39,45 @@
 
             <TextView android:text="Account Settings" android:textStyle="bold" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="16dp"/>
 
-            <include layout="@layout/item_setting_toggle" />
-            <include layout="@layout/item_setting_toggle" />
-            <include layout="@layout/item_setting_toggle" />
-        </LinearLayout>
-
-        <!-- Section 2: Meal Plan Preferences -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/bg_card"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <TextView android:text="Meal Plan Preferences" android:textStyle="bold" android:layout_width="match_parent" android:layout_height="wrap_content"/>
-
-            <TextView android:text="Daily Calorie Target" android:layout_marginTop="16dp" android:textSize="12sp" android:textColor="#888888" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:gravity="center_vertical" android:orientation="horizontal" android:layout_marginTop="8dp">
-                <SeekBar android:id="@+id/sbCalories" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:max="4000" android:progress="2000" android:progressTint="#2E7D32" android:thumbTint="#2E7D32"/>
-                <EditText android:layout_width="60dp" android:layout_height="40dp" android:text="2000" android:gravity="center" android:background="@drawable/bg_input_field" android:layout_marginStart="8dp"/>
-                <TextView android:text="cal" android:layout_marginStart="4dp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-            </LinearLayout>
-
-            <!-- Cuisine Chips -->
-            <TextView android:text="Cuisine Preferences" android:layout_marginTop="16dp" android:textSize="12sp" android:textColor="#888888" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
-            <com.google.android.material.chip.ChipGroup
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:chipSpacing="8dp">
-                <com.google.android.material.chip.Chip style="@style/Widget.MaterialComponents.Chip.Filter" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Mediterranean" android:checked="true" app:chipBackgroundColor="#2E7D32" android:textColor="@color/white"/>
-                <com.google.android.material.chip.Chip style="@style/Widget.MaterialComponents.Chip.Filter" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Asian" />
-                <com.google.android.material.chip.Chip style="@style/Widget.MaterialComponents.Chip.Filter" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Italian" android:checked="true" app:chipBackgroundColor="#2E7D32" android:textColor="@color/white"/>
-            </com.google.android.material.chip.ChipGroup>
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="8dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dark Mode"
+                        android:textColor="#333333"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Enable dark theme"
+                        android:textColor="#888888"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:thumbTint="#2E7D32"
+                    android:trackTint="#C8E6C9" />
+
+            </LinearLayout>
         </LinearLayout>
+
+
 
         <!-- Section 3: Notifications (THIS IS THE LISTVIEW) -->
         <LinearLayout

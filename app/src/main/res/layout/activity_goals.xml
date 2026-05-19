@@ -37,10 +37,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp">
 
-            <RadioButton android:id="@+id/rbLoseWeight" android:layout_width="match_parent" android:layout_height="50dp" android:text="Lose Weight" />
-            <RadioButton android:id="@+id/rbBuildMuscle" android:layout_width="match_parent" android:layout_height="50dp" android:text="Build Muscle" />
-            <RadioButton android:id="@+id/rbMaintain" android:layout_width="match_parent" android:layout_height="50dp" android:text="Maintain Energy" />
-            <RadioButton android:id="@+id/rbOverallHealth" android:layout_width="match_parent" android:layout_height="50dp" android:text="Improve Overall Health" />
+            <RadioButton android:id="@+id/rbLoseWeight" android:layout_width="match_parent" android:layout_height="50dp" android:text="Lose Weight" android:textColor="#333333"/>
+            <RadioButton android:id="@+id/rbBuildMuscle" android:layout_width="match_parent" android:layout_height="50dp" android:text="Build Muscle" android:textColor="#333333"/>
+            <RadioButton android:id="@+id/rbMaintain" android:layout_width="match_parent" android:layout_height="50dp" android:text="Maintain Energy" android:textColor="#333333"/>
+            <RadioButton android:id="@+id/rbOverallHealth" android:layout_width="match_parent" android:layout_height="50dp" android:text="Improve Overall Health" android:textColor="#333333"/>
         </RadioGroup>
 
         <!-- Activity Level Section -->
@@ -52,10 +52,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp">
 
-            <RadioButton android:id="@+id/rbSedentary" android:layout_width="match_parent" android:layout_height="50dp" android:text="Sedentary (Little or no exercise)" />
-            <RadioButton android:id="@+id/rbLight" android:layout_width="match_parent" android:layout_height="50dp" android:text="Lightly Active (1-3 days/week)" />
-            <RadioButton android:id="@+id/rbModerate" android:layout_width="match_parent" android:layout_height="50dp" android:text="Moderately Active (3-5 days/week)" />
-            <RadioButton android:id="@+id/rbVeryActive" android:layout_width="match_parent" android:layout_height="50dp" android:text="Very Active (6-7 days/week)" />
+            <RadioButton android:id="@+id/rbSedentary" android:layout_width="match_parent" android:layout_height="50dp" android:text="Sedentary (Little or no exercise)" android:textColor="#333333"/>
+            <RadioButton android:id="@+id/rbLight" android:layout_width="match_parent" android:layout_height="50dp" android:text="Lightly Active (1-3 days/week)" android:textColor="#333333"/>
+            <RadioButton android:id="@+id/rbModerate" android:layout_width="match_parent" android:layout_height="50dp" android:text="Moderately Active (3-5 days/week)" android:textColor="#333333"/>
+            <RadioButton android:id="@+id/rbVeryActive" android:layout_width="match_parent" android:layout_height="50dp" android:text="Very Active (6-7 days/week)" android:textColor="#333333"/>
         </RadioGroup>
 
         <!-- Navigation Buttons -->

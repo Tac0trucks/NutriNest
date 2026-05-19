@@ -53,6 +53,7 @@
             android:layout_height="55dp"
             android:layout_marginTop="32dp"
             android:backgroundTint="#67a373"
+            android:textColor="@color/white"
             android:text="Next"
             android:textAllCaps="false" />
 

@@ -16,5 +16,6 @@ interface MealPlanContract {
         fun addMeal(meal: MealPlan)      // CONCEPT: Add Item
         fun deleteMeal(position: Int)    // CONCEPT: Remove Item
         fun toggleMealSelection(position: Int) // CONCEPT: Click Listener Logic
+        fun generatePlan()
     }
 }

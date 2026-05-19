@@ -18,8 +18,7 @@ class ProfileFragment : Fragment(), ProfileContract.View {
     private lateinit var tvUserName: TextView
     private lateinit var tvUserEmail: TextView
     private lateinit var tvPersonalInfo: TextView
-    private lateinit var tvFirstNameLabel: TextView
-    private lateinit var tvLastNameLabel: TextView
+    private lateinit var tvFullNameLabel: TextView
     private lateinit var tvEmailLabel: TextView
     private lateinit var tvDietaryRestrictionsTitle: TextView
     private lateinit var btnAddCustom: Button
@@ -39,8 +38,7 @@ class ProfileFragment : Fragment(), ProfileContract.View {
         tvUserName = view.findViewById(R.id.tvUserName)
         tvUserEmail = view.findViewById(R.id.tvUserEmail)
         tvPersonalInfo = view.findViewById(R.id.tvPersonalInfo)
-        tvFirstNameLabel = view.findViewById(R.id.tvFirstNameLabel)
-        tvLastNameLabel = view.findViewById(R.id.tvLastNameLabel)
+        tvFullNameLabel = view.findViewById(R.id.tvFullNameLabel)
         tvEmailLabel = view.findViewById(R.id.tvEmailLabel)
         tvDietaryRestrictionsTitle = view.findViewById(R.id.tvDietaryRestrictionsTitle)
         btnAddCustom = view.findViewById(R.id.btnAddCustom)
@@ -52,8 +50,7 @@ class ProfileFragment : Fragment(), ProfileContract.View {
         tvProfileTitle.text = "Profile"
         tvProfileSubtitle.text = "Manage your account"
         tvPersonalInfo.text = "Personal Information"
-        tvFirstNameLabel.text = "First Name"
-        tvLastNameLabel.text = "Last Name"
+        tvFullNameLabel.text = "Full Name"
         tvEmailLabel.text = "Email Address"
         tvDietaryRestrictionsTitle.text = "Dietary Restrictions"
         btnAddCustom.text = "+ Add New Restriction"
@@ -83,6 +80,20 @@ class ProfileFragment : Fragment(), ProfileContract.View {
             presenter.addNewRestriction("Low Carb")
         }
 
+        btnSaveChanges.setOnClickListener {
+            val fullName = view.findViewById<EditText>(R.id.etFullName).text.toString()
+            val email = view.findViewById<EditText>(R.id.etEmail).text.toString()
+            
+            // Extract the list from the adapter
+            val listAdapter = listView.adapter as RestrictionAdapter
+            val restrictions = ArrayList<Restriction>()
+            for (i in 0 until listAdapter.count) {
+                restrictions.add(listAdapter.getItem(i) as Restriction)
+            }
+            
+            presenter.saveUserData(fullName, email, restrictions)
+        }
+
         view.findViewById<ImageView>(R.id.ivSettings)?.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, com.example.nutrinest.screens.settings.SettingsFragment())
@@ -90,9 +101,12 @@ class ProfileFragment : Fragment(), ProfileContract.View {
                 .commit()
         }
 
-        presenter.initData()
-
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        presenter.initData()
     }
 
     override fun displayRestrictions(list: ArrayList<Restriction>) {
@@ -107,11 +121,10 @@ class ProfileFragment : Fragment(), ProfileContract.View {
     override fun showUserInfo(name: String, email: String) {
         tvUserName.text = name
         tvUserEmail.text = email
-        // Populate fields based on User Info
-        val parts = name.split(" ")
-        view?.findViewById<EditText>(R.id.etFirstName)?.setText(if (parts.isNotEmpty()) parts[0] else "")
-        view?.findViewById<EditText>(R.id.etLastName)?.setText(if (parts.size > 1) parts[1] else "")
-        view?.findViewById<EditText>(R.id.etEmail)?.setText(email)
+        // Populate fields based on User Info (using requireView() or the existing references)
+        val view = requireView()
+        view.findViewById<EditText>(R.id.etFullName)?.setText(name)
+        view.findViewById<EditText>(R.id.etEmail)?.setText(email)
     }
 
     private fun setListViewHeightBasedOnChildren(listView: ListView) {

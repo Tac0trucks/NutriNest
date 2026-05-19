@@ -54,6 +54,7 @@ class HealthInfoActivity : AppCompatActivity(), HealthInfoContract.View {
         nextIntent.putExtra("EXTRA_NAME", intent.getStringExtra("EXTRA_NAME"))
         nextIntent.putExtra("EXTRA_EMAIL", intent.getStringExtra("EXTRA_EMAIL"))
         nextIntent.putExtra("EXTRA_PASS", intent.getStringExtra("EXTRA_PASS"))
+        nextIntent.putStringArrayListExtra("EXTRA_RESTRICTIONS", ArrayList(restrictions))
 
         startActivity(nextIntent)
     }

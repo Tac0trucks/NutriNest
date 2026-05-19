@@ -41,9 +41,10 @@ class GoalsActivity : AppCompatActivity(), GoalsContract.View {
 
         val name = intent.getStringExtra("EXTRA_NAME") ?: "User"
         val email = intent.getStringExtra("EXTRA_EMAIL") ?: ""
-
+        val restrictions = intent.getStringArrayListExtra("EXTRA_RESTRICTIONS") ?: ArrayList()
 
         val newUser = com.example.nutrinest.data.models.User("1", email, name, "fake-token")
+        newUser.restrictions = restrictions
         UserRepository.currentUser = newUser
 
         Toast.makeText(this, "Welcome to NutriNest, $name!", Toast.LENGTH_LONG).show()

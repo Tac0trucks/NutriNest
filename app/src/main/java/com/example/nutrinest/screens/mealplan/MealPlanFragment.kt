@@ -11,6 +11,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.nutrinest.R
 import com.example.nutrinest.data.models.MealPlan
+import android.widget.SeekBar
+import android.widget.EditText
+import com.example.nutrinest.data.repositories.UserRepository
 
 class MealPlanFragment : Fragment(), MealPlanContract.View {
 
@@ -72,12 +75,36 @@ class MealPlanFragment : Fragment(), MealPlanContract.View {
             true
         }
 
+        btnGenerate.setOnClickListener {
+            presenter.generatePlan()
+        }
+
+        // Init SeekBar
+        val sbCalories = view.findViewById<SeekBar>(R.id.sbCalories)
+        val etCalories = view.findViewById<EditText>(R.id.etCalories)
+        val currentUser = UserRepository.currentUser
+        val goal = currentUser?.calorieGoal ?: 2000
+        sbCalories.progress = goal
+        etCalories.setText(goal.toString())
+
+        sbCalories.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                etCalories.setText(progress.toString())
+            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                val newGoal = seekBar?.progress ?: 2000
+                UserRepository.currentUser?.calorieGoal = newGoal
+            }
+        })
+
         presenter.loadMeals()
         return view
     }
 
     override fun displayMeals(meals: ArrayList<MealPlan>) {
         listView.adapter = MealAdapter(requireContext(), meals)
+        setListViewHeightBasedOnChildren(listView)
     }
 
     override fun showToast(message: String) {
@@ -89,5 +116,19 @@ class MealPlanFragment : Fragment(), MealPlanContract.View {
         tvProteinValue.text = "${protein}g"
         tvCarbsValue.text = "${carbs}g"
         tvFatsValue.text = "${fats}g"
+    }
+
+    private fun setListViewHeightBasedOnChildren(listView: ListView) {
+        val listAdapter = listView.adapter ?: return
+        var totalHeight = 0
+        for (i in 0 until listAdapter.count) {
+            val listItem = listAdapter.getView(i, null, listView)
+            listItem.measure(0, 0)
+            totalHeight += listItem.measuredHeight
+        }
+        val params = listView.layoutParams
+        params.height = totalHeight + (listView.dividerHeight * (listAdapter.count - 1))
+        listView.layoutParams = params
+        listView.requestLayout()
     }
 }

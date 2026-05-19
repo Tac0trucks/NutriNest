@@ -37,26 +37,26 @@
 
             <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:layout_marginEnd="8dp">
                 <TextView style="@style/LabelStyle" android:text="Age" android:layout_marginTop="0dp"/>
-                <EditText android:id="@+id/etAge" style="@style/InputStyle" android:hint="25" android:inputType="number"/>
+                <EditText android:id="@+id/etAge" style="@style/InputStyle" android:inputType="number"/>
             </LinearLayout>
 
             <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="8dp">
                 <TextView style="@style/LabelStyle" android:text="Weight (kg)" android:layout_marginTop="0dp"/>
-                <EditText android:id="@+id/etWeight" style="@style/InputStyle" android:hint="70" android:inputType="numberDecimal"/>
+                <EditText android:id="@+id/etWeight" style="@style/InputStyle" android:inputType="numberDecimal"/>
             </LinearLayout>
         </LinearLayout>
 
         <TextView style="@style/LabelStyle" android:text="Height (cm)" />
-        <EditText android:id="@+id/etHeight" style="@style/InputStyle" android:hint="175" android:inputType="number"/>
+        <EditText android:id="@+id/etHeight" style="@style/InputStyle" android:inputType="number"/>
 
         <!-- Dietary Restrictions -->
         <TextView style="@style/LabelStyle" android:text="Dietary Restrictions (Select all that apply)" android:layout_marginTop="24dp"/>
 
-        <CheckBox android:id="@+id/cbVegan" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Vegan"/>
-        <CheckBox android:id="@+id/cbVegetarian" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Vegetarian"/>
-        <CheckBox android:id="@+id/cbGlutenFree" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Gluten-free"/>
-        <CheckBox android:id="@+id/cbSpicyFree" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Spicy-free"/>
-        <CheckBox android:id="@+id/cbDiabetic" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Diabetic-friendly"/>
+        <CheckBox android:id="@+id/cbVegan" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Vegan" android:textColor="#333333"/>
+        <CheckBox android:id="@+id/cbVegetarian" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Vegetarian" android:textColor="#333333"/>
+        <CheckBox android:id="@+id/cbGlutenFree" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Gluten-free" android:textColor="#333333"/>
+        <CheckBox android:id="@+id/cbSpicyFree" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Spicy-free" android:textColor="#333333"/>
+        <CheckBox android:id="@+id/cbDiabetic" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Diabetic-friendly" android:textColor="#333333"/>
 
         <!-- Allergies -->
         <TextView style="@style/LabelStyle" android:text="Allergies (comma-separated)" />
@@ -87,13 +87,14 @@
                 android:textColor="#67a373"
                  />
 
-            <Button
+                <Button
                 android:id="@+id/btnNext"
                 android:layout_width="0dp"
                 android:layout_height="55dp"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
                 android:backgroundTint="#67a373"
+                android:textColor="@color/white"
                 android:text="Next" />
         </LinearLayout>
 

@@ -58,6 +58,38 @@ class GroceryFragment : Fragment(), GroceryContract.View {
             true
         }
 
+        btnAddItem.setOnClickListener {
+            val builder = android.app.AlertDialog.Builder(requireContext())
+            builder.setTitle("Add New Item")
+
+            val layout = android.widget.LinearLayout(requireContext())
+            layout.orientation = android.widget.LinearLayout.VERTICAL
+            layout.setPadding(50, 40, 50, 10)
+
+            val nameInput = android.widget.EditText(requireContext())
+            nameInput.hint = "Item Name"
+            layout.addView(nameInput)
+
+            val qtyInput = android.widget.EditText(requireContext())
+            qtyInput.hint = "Quantity (e.g. 2 lbs)"
+            layout.addView(qtyInput)
+
+            builder.setView(layout)
+
+            builder.setPositiveButton("Add") { dialog, _ ->
+                val name = nameInput.text.toString()
+                val qty = qtyInput.text.toString()
+                if (name.isNotBlank()) {
+                    presenter.addNewItem(name, qty)
+                } else {
+                    Toast.makeText(context, "Name cannot be empty", Toast.LENGTH_SHORT).show()
+                }
+                dialog.dismiss()
+            }
+            builder.setNegativeButton("Cancel") { dialog, _ -> dialog.cancel() }
+            builder.show()
+        }
+
         presenter.loadGroceries()
         return view
     }

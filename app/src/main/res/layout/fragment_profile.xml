@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FDFDFD"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:clipToPadding="false"
+    android:paddingBottom="80dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -73,13 +75,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:gravity="center" />
 
         <TextView
             android:id="@+id/tvUserEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#888888" />
+            android:textColor="#888888"
+            android:gravity="center" />
 
         <!-- Personal Information Card -->
         <LinearLayout
@@ -92,14 +96,11 @@
 
             <TextView android:id="@+id/tvPersonalInfo" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
 
-            <TextView android:id="@+id/tvFirstNameLabel" style="@style/LabelStyle"/>
-            <EditText android:id="@+id/etFirstName" style="@style/InputStyle"/>
+            <TextView android:id="@+id/tvFullNameLabel" style="@style/LabelStyle" android:text="Full Name"/>
+            <EditText android:id="@+id/etFullName" style="@style/InputStyle" />
 
-            <TextView android:id="@+id/tvLastNameLabel" style="@style/LabelStyle"/>
-            <EditText android:id="@+id/etLastName" style="@style/InputStyle"/>
-
-            <TextView android:id="@+id/tvEmailLabel" style="@style/LabelStyle"/>
-            <EditText android:id="@+id/etEmail" style="@style/InputStyle" android:inputType="textEmailAddress"/>
+            <TextView android:id="@+id/tvEmailLabel" style="@style/LabelStyle" android:text="Email Address"/>
+            <EditText android:id="@+id/etEmail" style="@style/InputStyle" android:inputType="textEmailAddress" android:hint="e.g. john.doe@example.com"/>
         </LinearLayout>
 
         <!-- Dietary Restrictions Card (THE LISTVIEW FOR ASSIGNMENT) -->

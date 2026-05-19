@@ -47,14 +47,6 @@ class SettingsFragment : Fragment(), SettingsContract.View {
             presenter.toggleSetting(position)
         }
 
-        // --- 2. Calorie SeekBar Listener ---
-        binding.sbCalories.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {}
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                seekBar?.let { presenter.updateCalorieTarget(it.progress) }
-            }
-        })
 
         // --- 3. Action Buttons ---
         binding.btnExport.setOnClickListener {
@@ -65,6 +57,8 @@ class SettingsFragment : Fragment(), SettingsContract.View {
             // Logic to show a confirmation dialog would go here
             Toast.makeText(context, "Account deletion requires confirmation", Toast.LENGTH_LONG).show()
         }
+
+        // The calorie logic has been moved to MealPlanFragment
     }
 
     // --- View Interface Implementation ---

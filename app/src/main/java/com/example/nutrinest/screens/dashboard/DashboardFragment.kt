@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
+import android.widget.EditText
+import android.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.nutrinest.R
+import com.example.nutrinest.data.repositories.UserRepository
 
 class DashboardFragment : Fragment(), DashboardContract.View {
 
@@ -61,12 +64,30 @@ class DashboardFragment : Fragment(), DashboardContract.View {
         val btnAddSnack = view.findViewById<android.widget.Button>(R.id.btnAddSnack)
         btnAddSnack.text = "+ Add Snack"
         btnAddSnack.setOnClickListener {
-            presenter.addNewMeal("Snack", "Almonds and Apple", 150)
+            val editText = EditText(requireContext())
+            editText.hint = "e.g. Almonds and Apple (150 cal)"
+            
+            AlertDialog.Builder(requireContext())
+                .setTitle("Add Snack")
+                .setView(editText)
+                .setPositiveButton("Add") { _, _ ->
+                    val snackName = editText.text.toString()
+                    if (snackName.isNotBlank()) {
+                        presenter.addNewMeal("Snack", snackName, 150)
+                    }
+                }
+                .setNegativeButton("Cancel", null)
+                .show()
         }
 
         presenter.loadInitialMeals()
 
         return view
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.loadInitialMeals()
     }
 
     override fun showUserInfo(name: String) {
@@ -82,7 +103,7 @@ class DashboardFragment : Fragment(), DashboardContract.View {
     }
 
     override fun updateTotalCalories(calories: Int) {
-        // Formatting with commas could be added, but simple string concatenation works for now
-        tvCaloriesValue.text = "%,d / 2,000 cal".format(calories)
+        val goal = UserRepository.currentUser?.calorieGoal ?: 2000
+        tvCaloriesValue.text = "%,d / %,d cal".format(calories, goal)
     }
 }

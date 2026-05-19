@@ -22,10 +22,22 @@ class DashboardPresenter : DashboardContract.Presenter {
         val name = user?.fullName ?: "User"
         view?.showUserInfo(name)
 
-        // Adding initial data from Figma
-        mealList.add(Meal(1, "Breakfast", "Greek yogurt bowl", 420, true))
-        mealList.add(Meal(2, "Lunch", "Grilled chicken salad", 580, true))
-        mealList.add(Meal(3, "Dinner", "Salmon with vegetables", 650, false))
+        // Read from global MealRepository
+        val globalMeals = com.example.nutrinest.data.repositories.MealRepository.currentMeals
+        mealList.clear()
+        
+        if (globalMeals.isNotEmpty()) {
+            globalMeals.forEachIndexed { index, plan ->
+                // "08:00 AM - Breakfast" -> "Breakfast"
+                val type = plan.timeAndType.split(" - ").getOrNull(1) ?: "Meal"
+                mealList.add(Meal(plan.id, type, plan.title, plan.calories, false))
+            }
+        } else {
+            // Adding initial data to match MealPlan if empty
+            mealList.add(Meal(1, "Breakfast", "Berry Smoothie Bowl", 410, false))
+            mealList.add(Meal(2, "Lunch", "Turkey & Veggie Wrap", 480, false))
+        }
+        
         updateView()
     }
 

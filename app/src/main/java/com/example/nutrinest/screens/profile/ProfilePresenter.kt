@@ -18,10 +18,21 @@ class ProfilePresenter : ProfileContract.Presenter {
         val email = user?.email ?: "user@example.com"
         view?.showUserInfo(name, email)
 
-        // Initial items from Figma
-        restrictionList.add(Restriction(1, "Vegetarian"))
-        restrictionList.add(Restriction(2, "Vegan"))
-        restrictionList.add(Restriction(3, "Gluten-Free", true))
+        // Create standard options and check them if they are in the user's restrictions
+        val standardRestrictions = listOf("Vegan", "Vegetarian", "Gluten-free", "Spicy-free", "Diabetic")
+        val userRestrictions = user?.restrictions ?: emptyList()
+        
+        standardRestrictions.forEachIndexed { index, name ->
+            restrictionList.add(Restriction(index + 1, name, userRestrictions.contains(name)))
+        }
+        
+        // Add any custom restrictions the user might have added
+        userRestrictions.forEach { name ->
+            if (!standardRestrictions.contains(name)) {
+                restrictionList.add(Restriction(restrictionList.size + 1, name, true))
+            }
+        }
+        
         view?.displayRestrictions(restrictionList)
     }
 
@@ -40,5 +51,20 @@ class ProfilePresenter : ProfileContract.Presenter {
     override fun toggleRestriction(position: Int) {
         restrictionList[position].isChecked = !restrictionList[position].isChecked
         view?.displayRestrictions(restrictionList)
+    }
+
+    override fun saveUserData(fullName: String, email: String, restrictions: List<Restriction>) {
+        val user = com.example.nutrinest.data.repositories.UserRepository.currentUser
+        if (user != null) {
+            val newFullName = fullName.trim()
+            val checkedRestrictions = restrictions.filter { it.isChecked }.map { it.name }.toMutableList()
+            
+            // Create updated user and save to repository
+            val updatedUser = user.copy(fullName = newFullName, email = email, restrictions = checkedRestrictions)
+            com.example.nutrinest.data.repositories.UserRepository.currentUser = updatedUser
+            
+            view?.showStatus("Profile updated!")
+            view?.showUserInfo(newFullName, email)
+        }
     }
 }
