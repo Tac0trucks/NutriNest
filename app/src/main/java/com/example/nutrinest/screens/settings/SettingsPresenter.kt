@@ -12,8 +12,8 @@ class SettingsPresenter : SettingsContract.Presenter {
 
     override fun loadSettings() {
         // Concept: ArrayList usage for ListView
-        notificationList.add(SettingOption(1, "Meal Reminders", "Get notified about upcoming meals", true))
-        notificationList.add(SettingOption(2, "Water Reminders", "Reminders to stay hydrated", true))
+        notificationList.add(SettingOption(1, "Meal Alerts", "Get notified about upcoming meals", true))
+        notificationList.add(SettingOption(2, "Water Alerts", "Reminders to stay hydrated", true))
         notificationList.add(SettingOption(3, "Weekly Report", "Receive weekly progress summaries", true))
         notificationList.add(SettingOption(4, "Marketing Emails", "Receive promotional content", false))
 

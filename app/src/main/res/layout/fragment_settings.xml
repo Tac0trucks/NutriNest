@@ -29,54 +29,6 @@
             android:textColor="#888888"
             android:layout_marginBottom="24dp"/>
 
-        <!-- Section 1: Account Settings (Fixed Rows) -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_card"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <TextView android:text="Account Settings" android:textStyle="bold" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginBottom="16dp"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingVertical="8dp">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Dark Mode"
-                        android:textColor="#333333"
-                        android:textStyle="bold"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Enable dark theme"
-                        android:textColor="#888888"
-                        android:textSize="11sp" />
-                </LinearLayout>
-
-                <androidx.appcompat.widget.SwitchCompat
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:thumbTint="#2E7D32"
-                    android:trackTint="#C8E6C9" />
-
-            </LinearLayout>
-        </LinearLayout>
-
 
 
         <!-- Section 3: Notifications (THIS IS THE LISTVIEW) -->
@@ -93,7 +45,7 @@
             <ListView
                 android:id="@+id/lvNotifications"
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:divider="@android:color/transparent"
                 android:dividerHeight="8dp" />

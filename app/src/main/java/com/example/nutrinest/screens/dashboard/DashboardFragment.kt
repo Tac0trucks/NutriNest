@@ -60,26 +60,6 @@ class DashboardFragment : Fragment(), DashboardContract.View {
             true // Tells Android the click is handled
         }
 
-        // Simulating "Add Item" from a button click (as per requirement)
-        val btnAddSnack = view.findViewById<android.widget.Button>(R.id.btnAddSnack)
-        btnAddSnack.text = "+ Add Snack"
-        btnAddSnack.setOnClickListener {
-            val editText = EditText(requireContext())
-            editText.hint = "e.g. Almonds and Apple (150 cal)"
-            
-            AlertDialog.Builder(requireContext())
-                .setTitle("Add Snack")
-                .setView(editText)
-                .setPositiveButton("Add") { _, _ ->
-                    val snackName = editText.text.toString()
-                    if (snackName.isNotBlank()) {
-                        presenter.addNewMeal("Snack", snackName, 150)
-                    }
-                }
-                .setNegativeButton("Cancel", null)
-                .show()
-        }
-
         presenter.loadInitialMeals()
 
         return view
