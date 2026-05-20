@@ -58,6 +58,10 @@ class SettingsFragment : Fragment(), SettingsContract.View {
             Toast.makeText(context, "Account deletion requires confirmation", Toast.LENGTH_LONG).show()
         }
 
+        binding.btnLogout.setOnClickListener {
+            presenter.handleLogout()
+        }
+
         // The calorie logic has been moved to MealPlanFragment
     }
 
@@ -77,6 +81,12 @@ class SettingsFragment : Fragment(), SettingsContract.View {
 
         // Refresh the list to show the switch change
         adapter.notifyDataSetChanged()
+    }
+
+    override fun navigateToLogin() {
+        val intent = android.content.Intent(requireContext(), com.example.nutrinest.screens.login.LoginActivity::class.java)
+        intent.flags = android.content.Intent.FLAG_ACTIVITY_NEW_TASK or android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 
     // --- HELPER FUNCTION: ListView inside ScrollView Fix ---

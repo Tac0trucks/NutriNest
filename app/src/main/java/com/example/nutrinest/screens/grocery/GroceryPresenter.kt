@@ -1,10 +1,10 @@
 package com.example.nutrinest.screens.grocery
 
 import com.example.nutrinest.data.models.GroceryItem
+import com.example.nutrinest.data.repositories.GroceryRepository
 
 class GroceryPresenter : GroceryContract.Presenter {
     private var view: GroceryContract.View? = null
-    private val fullList = ArrayList<GroceryItem>()
     private var displayedList = ArrayList<GroceryItem>()
 
     override fun attachView(view: GroceryContract.View) {
@@ -12,24 +12,20 @@ class GroceryPresenter : GroceryContract.Presenter {
     }
 
     override fun loadGroceries() {
-        // Initializing with Figma data
-        fullList.clear()
-        fullList.add(GroceryItem(1, "Spinach", "2 bunches"))
-        fullList.add(GroceryItem(2, "Chicken Breast", "2 lbs"))
-        displayedList = ArrayList(fullList)
+        displayedList = ArrayList(GroceryRepository.fullList)
         view?.displayItems(displayedList)
     }
 
     override fun addNewItem(name: String, qty: String) {
-        val newItem = GroceryItem(fullList.size + 1, name, qty)
-        fullList.add(newItem) // CONCEPT: Add Item
+        val newItem = GroceryItem(GroceryRepository.fullList.size + 1, name, qty)
+        GroceryRepository.fullList.add(newItem) // CONCEPT: Add Item
         displayedList.add(newItem)
         view?.displayItems(displayedList)
     }
 
     override fun removeItem(position: Int) {
         val item = displayedList.removeAt(position) // CONCEPT: Remove Item
-        fullList.remove(item)
+        GroceryRepository.fullList.remove(item)
         view?.displayItems(displayedList)
     }
 
@@ -41,9 +37,9 @@ class GroceryPresenter : GroceryContract.Presenter {
     override fun filterItems(query: String) {
         val queryLower = query.lowercase()
         displayedList = if (queryLower.isEmpty()) {
-            ArrayList(fullList)
+            ArrayList(GroceryRepository.fullList)
         } else {
-            ArrayList(fullList.filter { it.name.lowercase().contains(queryLower) })
+            ArrayList(GroceryRepository.fullList.filter { it.name.lowercase().contains(queryLower) })
         }
         view?.displayItems(displayedList)
     }

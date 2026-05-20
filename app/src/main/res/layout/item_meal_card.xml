@@ -65,6 +65,8 @@
         android:id="@+id/cbMealDone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:focusable="true"
+        android:clickable="true"
         android:buttonTint="#2E7D32" />
 
 </LinearLayout>

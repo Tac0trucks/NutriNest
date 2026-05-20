@@ -41,7 +41,13 @@ class GoalsActivity : AppCompatActivity(), GoalsContract.View {
 
         val name = intent.getStringExtra("EXTRA_NAME") ?: "User"
         val email = intent.getStringExtra("EXTRA_EMAIL") ?: ""
+        val pass = intent.getStringExtra("EXTRA_PASS") ?: ""
         val restrictions = intent.getStringArrayListExtra("EXTRA_RESTRICTIONS") ?: ArrayList()
+
+        // Register the new user account in our mock database
+        if (email.isNotBlank() && pass.isNotBlank()) {
+            UserRepository.registeredAccounts[email] = pass
+        }
 
         val newUser = com.example.nutrinest.data.models.User("1", email, name, "fake-token")
         newUser.restrictions = restrictions

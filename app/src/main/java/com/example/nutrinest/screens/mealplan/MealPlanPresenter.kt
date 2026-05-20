@@ -11,14 +11,17 @@ class MealPlanPresenter : MealPlanContract.Presenter {
 
     override fun loadMeals() {
         val meals = com.example.nutrinest.data.repositories.MealRepository.currentMeals
-        if (meals.isEmpty()) {
+        if (!com.example.nutrinest.data.repositories.MealRepository.isInitialized && meals.isEmpty()) {
+            com.example.nutrinest.data.repositories.MealRepository.isInitialized = true
             // Initial mock data to match Dashboard (if empty)
             meals.add(MealPlan(1, "Berry Smoothie Bowl", "08:00 AM - Breakfast", "A refreshing antioxidant-packed start.", 410, "15g", "60g", "8g"))
             meals.add(MealPlan(2, "Turkey & Veggie Wrap", "01:00 PM - Lunch", "Lean protein wrapped in whole grain.", 480, "35g", "45g", "15g"))
         }
         
-        view?.displayMeals(meals)
-        calculateDailyTotals(meals)
+        // Pass a copy so adapter modifications don't instantly affect the repository reference before animation ends
+        val mealsCopy = ArrayList(meals)
+        view?.displayMeals(mealsCopy)
+        calculateDailyTotals(mealsCopy)
     }
 
     override fun addMeal(meal: MealPlan) {

@@ -48,8 +48,16 @@ class GroceryFragment : Fragment(), GroceryContract.View {
         })
 
         // CONCEPT: Click Listener
-        listView.setOnItemClickListener { _, _, position, _ ->
-            presenter.toggleCheck(position)
+        listView.setOnItemClickListener { _, viewRow, position, _ ->
+            val cb = viewRow.findViewById<android.widget.CheckBox>(R.id.cbItem)
+            cb.isChecked = true
+            viewRow.isEnabled = false
+            viewRow.animate().alpha(0f).setDuration(300).withEndAction {
+                presenter.removeItem(position)
+                viewRow.alpha = 1f // Reset for view recycling
+                viewRow.isEnabled = true
+                cb.isChecked = false
+            }.start()
         }
 
         // CONCEPT: Long Click Listener

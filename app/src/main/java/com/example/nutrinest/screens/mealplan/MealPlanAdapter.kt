@@ -22,11 +22,31 @@ class MealAdapter(private val context: Context, private var list: ArrayList<Meal
         val meal = list[position]
 
         // Binding complex data (Custom ListView Concept)
-        view.findViewById<TextView>(R.id.tvMealTitle).text = meal.title
+        val tvMealTitle = view.findViewById<TextView>(R.id.tvMealTitle)
+        tvMealTitle.text = meal.title
+        
         view.findViewById<TextView>(R.id.tvMealTimeType).text = meal.timeAndType
         view.findViewById<TextView>(R.id.tvMealDescription).text = meal.description
         view.findViewById<TextView>(R.id.tvMealMacros).text = "P: ${meal.protein}  C: ${meal.carbs}"
-        view.findViewById<CheckBox>(R.id.cbMealDone).isChecked = meal.isChecked
+        val cbMealDone = view.findViewById<CheckBox>(R.id.cbMealDone)
+        cbMealDone.setOnCheckedChangeListener(null)
+        cbMealDone.isChecked = meal.isChecked
+
+        cbMealDone.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                cbMealDone.isEnabled = false
+                
+                // Explicitly delete from global repository BEFORE animating
+                com.example.nutrinest.data.repositories.MealRepository.currentMeals.remove(meal)
+                
+                view.animate().alpha(0f).setDuration(300).withEndAction {
+                    list.remove(meal)
+                    notifyDataSetChanged()
+                    view.alpha = 1.0f
+                    cbMealDone.isEnabled = true
+                }.start()
+            }
+        }
 
         return view
     }

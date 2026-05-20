@@ -29,4 +29,9 @@ class SettingsPresenter : SettingsContract.Presenter {
     override fun updateCalorieTarget(value: Int) {
         // Logic to update calories
     }
+
+    override fun handleLogout() {
+        com.example.nutrinest.data.repositories.UserRepository.currentUser = null
+        view?.navigateToLogin()
+    }
 }

@@ -26,16 +26,16 @@ class DashboardPresenter : DashboardContract.Presenter {
         val globalMeals = com.example.nutrinest.data.repositories.MealRepository.currentMeals
         mealList.clear()
         
-        if (globalMeals.isNotEmpty()) {
-            globalMeals.forEachIndexed { index, plan ->
-                // "08:00 AM - Breakfast" -> "Breakfast"
-                val type = plan.timeAndType.split(" - ").getOrNull(1) ?: "Meal"
-                mealList.add(Meal(plan.id, type, plan.title, plan.calories, false))
-            }
-        } else {
-            // Adding initial data to match MealPlan if empty
-            mealList.add(Meal(1, "Breakfast", "Berry Smoothie Bowl", 410, false))
-            mealList.add(Meal(2, "Lunch", "Turkey & Veggie Wrap", 480, false))
+        if (!com.example.nutrinest.data.repositories.MealRepository.isInitialized && globalMeals.isEmpty()) {
+            com.example.nutrinest.data.repositories.MealRepository.isInitialized = true
+            globalMeals.add(com.example.nutrinest.data.models.MealPlan(1, "Berry Smoothie Bowl", "08:00 AM - Breakfast", "A refreshing antioxidant-packed start.", 410, "15g", "60g", "8g"))
+            globalMeals.add(com.example.nutrinest.data.models.MealPlan(2, "Turkey & Veggie Wrap", "01:00 PM - Lunch", "Lean protein wrapped in whole grain.", 480, "35g", "45g", "15g"))
+        }
+
+        globalMeals.forEach { plan ->
+            // "08:00 AM - Breakfast" -> "Breakfast"
+            val type = plan.timeAndType.split(" - ").getOrNull(1) ?: "Meal"
+            mealList.add(Meal(plan.id, type, plan.title, plan.calories, false))
         }
         
         updateView()

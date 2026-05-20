@@ -28,7 +28,7 @@ class LoginPresenter(private val repository: UserRepository) : LoginContract.Pre
             result.onSuccess { user ->
                 view?.onLoginSuccess(user)
             }.onFailure { error ->
-                view?.showError(error.message ?: "Login Failed")
+                view?.showError(error.message ?: "Invalid email or password")
             }
         }
     }

@@ -6,6 +6,7 @@ interface SettingsContract {
     interface View {
         fun displayNotificationSettings(list: ArrayList<SettingOption>)
         fun onSettingChanged(name: String, state: Boolean)
+        fun navigateToLogin()
     }
 
     interface Presenter {
@@ -13,5 +14,6 @@ interface SettingsContract {
         fun loadSettings()
         fun toggleSetting(position: Int) // CONCEPT: Click/Toggle logic
         fun updateCalorieTarget(value: Int)
+        fun handleLogout()
     }
 }
